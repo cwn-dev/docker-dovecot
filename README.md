@@ -10,7 +10,7 @@ The [docker-compose.yml](docker-compose.yml) should run with no changes, in theo
 
 ```sh
 $ MAIL_PASSWORD=`doveadm pw -s BLF-CRYPT  -p somepassword`
-$ echo "app:$MAIL_PASSWORD:1000:1000::/home/app::" > /etc/dovecot/users
+$ echo "app:$MAIL_PASSWORD:1000:1000::/home/app" > /etc/dovecot/users
 ```
 
 ### Take Ownership of the /home Folder

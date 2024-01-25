@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       - MBOXFORMAT=maildir
-      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      #- MAIL_PASSWORD=${MAIL_PASSWORD}
     ports:
       - "143:143"
     volumes:

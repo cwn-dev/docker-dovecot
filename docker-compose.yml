@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  dovecot:
+    container_name: dovecot
+    image: dovecot:latest
+    restart: always
+    environment:
+      - MBOXFORMAT=maildir
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+    ports:
+      - "143:143"
+    volumes:
+      - ./dovecot_data/app/mail:/home/app

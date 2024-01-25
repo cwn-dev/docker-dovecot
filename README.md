@@ -20,3 +20,11 @@ I will fix this at some point as it shouldn't be necessary, but it was a quick f
 ```
 chown -R app:app /home/app
 ```
+
+# The Plan
+
+Ultimately this image will contain [Postfix Admin](https://hub.docker.com/_/postfixadmin) which will allow us to manage dovecot via a web UI.
+
+I will probably create a separate isync docker image as well as that's how my mail will be pulled down off the server.
+
+Undecided if these will be separate projects/repos or if I'll just do it all here.

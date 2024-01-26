@@ -1,5 +1,12 @@
 FROM debian:bookworm-slim
 
+ENV NAME = unset
+ENV SERVER = unset
+ENV EMAIL = unset
+ENV PASSWORD = unset
+
+COPY root/ /
+
 RUN apt update && \ 
     apt install dovecot-imapd isync -y && \
     echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \
@@ -13,7 +20,11 @@ RUN apt update && \
     chown -R 1000:1000 /home/app && \
     find /home/app -type d -print0 | xargs -0 chmod 755
 
-COPY root/ /
+RUN sed 's/{NAME}/$NAME/g' /mbsync.conf && \
+    sed 's/{SERVER}/$SERVER/g' /mbsync.conf && \
+    sed 's/{EMAIL}/$EMAIL/g' /mbsync.conf && \
+    sed 's/{PASSWORD}/$PASSWORD/g' /mbsync.conf && \
+    mv /mbsync.conf /home/app/.mbsyncrc
 
 EXPOSE 143
 

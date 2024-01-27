@@ -6,7 +6,7 @@ ENV EMAIL = unset
 ENV PASSWORD = unset
 
 RUN apt update && \ 
-    apt install dovecot-imapd isync ca-certificates -y && \
+    apt install dovecot-imapd isync ca-certificates cron -y && \
     echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \
     echo "log_path = /dev/stderr" >> /etc/dovecot/conf.d/10-logging.conf && \
     echo "auth_verbose = yes" >> /etc/dovecot/conf.d/10-logging.conf && \

@@ -1,1 +1,0 @@
-*/5 * * * * mbsync -c /mbsync.conf {NAME} >/dev/null 2>&1

@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  dovecot:
+    container_name: dovecot
+    image: dovecot:latest
+    restart: always
+    environment:
+      - NAME=somename
+      - SERVER=mail.yourmailserver.com
+      - EMAIL=your@email.com
+      - PASSWORD=your_email_password
+    ports:
+      - "143:143"
+    volumes:
+      - ./dovecot_data/app/mail:/home/app

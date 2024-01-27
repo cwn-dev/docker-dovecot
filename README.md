@@ -13,14 +13,6 @@ $ MAIL_PASSWORD=`doveadm pw -s BLF-CRYPT  -p somepassword`
 $ echo "app:$MAIL_PASSWORD:1000:1000::/home/app" > /etc/dovecot/users
 ```
 
-### Take Ownership of the /home Folder
-
-I will fix this at some point as it shouldn't be necessary, but it was a quick fix at the time.
-
-```
-chown -R app:app /home/app
-```
-
 # The Plan
 
 * isync cron

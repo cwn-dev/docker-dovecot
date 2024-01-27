@@ -1,2 +1,3 @@
 /conf.sh.sample
 dovecot_data/
+docker-compose.yml

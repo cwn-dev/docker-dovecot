@@ -25,5 +25,6 @@ RUN chmod +x /start.sh
 EXPOSE 143 25
 
 VOLUME /home/app/mail/maildir
+VOLUME /etc/dovecot
 
 ENTRYPOINT [ "/start.sh" ]

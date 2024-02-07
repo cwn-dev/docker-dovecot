@@ -1,9 +1,13 @@
 FROM debian:bookworm-slim
 
+# SMTP
 ENV SMTP_HOST = unset
 ENV SMTP_PORT = unset
 ENV SMTP_USER = unset
 ENV SMTP_PASSWORD = unset
+
+# Other
+ENV DOMAIN_NAME = unset
 
 RUN apt update && \ 
     apt install dovecot-imapd dovecot-submissiond ca-certificates -y && \

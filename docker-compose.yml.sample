@@ -9,6 +9,7 @@ services:
       - SMTP_PORT=587
       - SMTP_USER=email@name.com
       - SMTP_PASSWORD=somepassword
+      - DOMAIN_NAME=name.com
     ports:
       - "143:143"
       - "25:25"

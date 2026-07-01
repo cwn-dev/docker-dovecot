@@ -9,19 +9,25 @@ ENV SMTP_PASSWORD=unset
 # Other
 ENV DOMAIN_NAME = unset
 
-RUN apt update && \ 
-    # Install
-    apt install dovecot-imapd dovecot-submissiond ca-certificates -y && \
+RUN apt update && \
+    apt install -y \
+        dovecot-imapd \
+        dovecot-submissiond \
+        dovecot-fts-flatcurve \
+        ca-certificates && \
+        
     echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \
     echo "log_path = /dev/stderr" >> /etc/dovecot/conf.d/10-logging.conf && \
     echo "auth_verbose = yes" >> /etc/dovecot/conf.d/10-logging.conf && \
     echo "disable_plaintext_auth = no" >> /etc/dovecot/conf.d/10-auth.conf && \
     echo "auth_mechanisms = plain" >> /etc/dovecot/conf.d/10-auth.conf && \
     echo "maildir_very_dirty_syncs = yes" >> /etc/dovecot/conf.d/10-mail.conf && \
+    
     # FTS config
     mkdir -p /etc/dovecot/conf.d && \
     echo "mail_plugins = \$mail_plugins fts fts_flatcurve" > /etc/dovecot/conf.d/90-fts.conf && \
     echo "plugin { fts = flatcurve }" >> /etc/dovecot/conf.d/90-fts.conf && \
+    
     rm -rf /tmp/* /var/tmp/* && \
     
     adduser --disabled-password --gecos "" app && \

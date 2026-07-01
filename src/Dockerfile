@@ -1,15 +1,16 @@
 FROM debian:bookworm-slim
 
 # SMTP
-ENV SMTP_HOST = unset
-ENV SMTP_PORT = unset
-ENV SMTP_USER = unset
-ENV SMTP_PASSWORD = unset
+ENV SMTP_HOST=unset
+ENV SMTP_PORT=unset
+ENV SMTP_USER=unset
+ENV SMTP_PASSWORD=unset
 
 # Other
 ENV DOMAIN_NAME = unset
 
 RUN apt update && \ 
+    # Install
     apt install dovecot-imapd dovecot-submissiond ca-certificates -y && \
     echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \
     echo "log_path = /dev/stderr" >> /etc/dovecot/conf.d/10-logging.conf && \
@@ -17,7 +18,12 @@ RUN apt update && \
     echo "disable_plaintext_auth = no" >> /etc/dovecot/conf.d/10-auth.conf && \
     echo "auth_mechanisms = plain" >> /etc/dovecot/conf.d/10-auth.conf && \
     echo "maildir_very_dirty_syncs = yes" >> /etc/dovecot/conf.d/10-mail.conf && \
+    # FTS config
+    mkdir -p /etc/dovecot/conf.d && \
+    echo "mail_plugins = \$mail_plugins fts fts_flatcurve" > /etc/dovecot/conf.d/90-fts.conf && \
+    echo "plugin { fts = flatcurve }" >> /etc/dovecot/conf.d/90-fts.conf && \
     rm -rf /tmp/* /var/tmp/* && \
+    
     adduser --disabled-password --gecos "" app && \
     MAIL_PASSWORD=`doveadm pw -s BLF-CRYPT  -p dovecot` && \
     echo "app:$MAIL_PASSWORD:1000:1000::/home/app" > /etc/dovecot/users

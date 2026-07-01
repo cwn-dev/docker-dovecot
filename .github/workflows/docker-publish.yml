@@ -39,8 +39,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./src/Dockerfile
+          context: ./src
+          file: ./Dockerfile
           push: true
           platforms: linux/arm64
           tags: ${{ steps.vars.outputs.tags }}

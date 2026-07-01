@@ -12,7 +12,9 @@ ENV DOMAIN_NAME = unset
 RUN apt update && \
     apt install -y \
         dovecot-imapd \
-        dovecot-submissiond \
+        dovecot-submissiond && \
+        dovecot-fts-xapian && \
+        libxapian30 && \
         ca-certificates && \
         
     echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \

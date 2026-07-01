@@ -12,18 +12,18 @@ ENV DOMAIN_NAME = unset
 RUN apt update && \
     apt install -y \
         dovecot-imapd \
-        dovecot-submissiond && \
-        dovecot-fts-xapian && \
-        libxapian30 && \
+        dovecot-submissiond \
+        dovecot-fts-xapian \
+        libxapian30 \
         ca-certificates && \
-        
+
     echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \
     echo "log_path = /dev/stderr" >> /etc/dovecot/conf.d/10-logging.conf && \
     echo "auth_verbose = yes" >> /etc/dovecot/conf.d/10-logging.conf && \
     echo "disable_plaintext_auth = no" >> /etc/dovecot/conf.d/10-auth.conf && \
     echo "auth_mechanisms = plain" >> /etc/dovecot/conf.d/10-auth.conf && \
     echo "maildir_very_dirty_syncs = yes" >> /etc/dovecot/conf.d/10-mail.conf && \
-    
+
     adduser --disabled-password --gecos "" app && \
     MAIL_PASSWORD=`doveadm pw -s BLF-CRYPT  -p dovecot` && \
     echo "app:$MAIL_PASSWORD:1000:1000::/home/app" > /etc/dovecot/users
